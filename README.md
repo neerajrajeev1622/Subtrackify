@@ -51,9 +51,10 @@ It provides real-time spending insights, reminders for upcoming payments, CSV im
 ## 📊 Screenshots
 
 ```
-![Login Page](screenshots/login.png)
-![Dashboard](screenshots/dashboard.png)
-![Analytics](screenshots/analytics.png)
+![App logo](screenshot/app logo.png)
+![Login Page](screenshot/login page.png)
+![Dashboard](screenshot/dashboard.png)
+![Analytics](screenshot/analytics.png)
 ```
 
 ---
