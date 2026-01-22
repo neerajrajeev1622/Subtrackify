@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SubTrackify | Dashboard</title>
+
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="app">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-rocket"></i>
+            <span>SubTrackify</span>
+        </div>
+
+        <nav>
+            <a class="nav active" onclick="showSection(event,'dashboard')">
+                <i class="fa-solid fa-house"></i> Dashboard
+            </a>
+
+            <a class="nav" onclick="showSection(event,'subscriptions')">
+                <i class="fa-solid fa-box"></i> Subscriptions
+            </a>
+
+            <a class="nav" onclick="showSection(event,'analytics')">
+                <i class="fa-solid fa-chart-line"></i> Analytics
+            </a>
+
+            <a class="nav" onclick="showSection(event,'reminders')">
+                <i class="fa-solid fa-bell"></i> Reminders
+            </a>
+
+            <a class="nav" onclick="showSection(event,'settings')">
+                <i class="fa-solid fa-gear"></i> Settings
+            </a>
+        </nav>
+
+        <button class="logout" onclick="logout()">Logout</button>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+
+        <!-- Top Bar -->
+        <div class="topbar">
+            <input id="search" placeholder="Search subscriptions..." onkeyup="searchSubscriptions()">
+            <div class="profile">NR</div>
+        </div>
+
+        <!-- Dashboard -->
+        <section id="dashboard" class="section active-section">
+
+            <div class="stats">
+                <div class="card">
+                    <h3>Total Subscriptions</h3>
+                    <p id="totalSubs">0</p>
+                </div>
+
+                <div class="card">
+                    <h3>Monthly Spend</h3>
+                    <p id="monthlySpend">₹0</p>
+                </div>
+
+                <div class="card">
+                    <h3>Yearly Spend</h3>
+                    <p id="yearlySpend">₹0</p>
+                </div>
+
+                <div class="card">
+                    <h3>Upcoming Renewals</h3>
+                    <p id="upcomingCount">0</p>
+                </div>
+            </div>
+
+            <div class="content">
+
+                <div class="table-box">
+                    <h3>My Subscriptions</h3>
+
+                    <table id="subsTable">
+                        <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Amount</th>
+                            <th>Cycle</th>
+                            <th>Next Billing</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <div class="upcoming">
+                    <h3>Upcoming Payments</h3>
+                    <div id="upcomingList"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Subscriptions -->
+        <section id="subscriptions" class="section">
+
+            <h2>Manage Subscriptions</h2>
+
+            <div class="subscription-card">
+
+                <div class="field">
+                    <label>Service</label>
+                    <input id="service" placeholder="Netflix">
+                </div>
+
+                <div class="field">
+                    <label>Amount (₹)</label>
+                    <input id="amount" type="number" placeholder="499">
+                </div>
+
+                <div class="field">
+                    <label>Billing Cycle</label>
+                    <select id="cycle">
+                        <option value="MONTHLY">Monthly</option>
+                        <option value="YEARLY">Yearly</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>Subscription bought date</label>
+                    <input id="nextDate" type="date">
+                </div>
+
+                <button class="add-btn" onclick="addSubscription()">
+                    <i class="fa-solid fa-plus"></i> Add Subscription
+                </button>
+
+            </div>
+
+            <table class="crud-table">
+                <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Amount</th>
+                    <th>Cycle</th>
+                    <th>Next Billing</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody id="crudBody"></tbody>
+            </table>
+
+        </section>
+
+        <!-- ================= ANALYTICS ================= -->
+        <section id="analytics" class="section">
+
+            <h2>Analytics Overview</h2>
+
+            <div class="analytics-grid">
+
+                <!-- Monthly Trend -->
+                <div class="analytics-card">
+                    <h3>Monthly Spending Trend</h3>
+                    <canvas id="monthlyChart"></canvas>
+                </div>
+
+                <!-- Yearly Trend -->
+                <div class="analytics-card">
+                    <h3>Yearly Spending Trend</h3>
+                    <canvas id="yearlyChart"></canvas>
+                </div>
+
+                <!-- Billing Cycle Pie -->
+                <div class="analytics-card">
+                    <h3>Spending by Billing Cycle</h3>
+                    <canvas id="cycleChart"></canvas>
+                </div>
+
+                <!-- Smart Insights -->
+                <div class="analytics-card insights">
+                    <h3>Smart Insights</h3>
+
+                    <p id="insightTotal">Total Spend: ₹0</p>
+                    <p id="insightHighest">Highest Subscription: -</p>
+                    <p id="insightMonthly">Monthly Plans: 0</p>
+                    <p id="insightYearly">Yearly Plans: 0</p>
+                </div>
+
+            </div>
+
+        </section>
+        <!-- ================================================= -->
+
+        <section id="reminders" class="section">
+
+            <h2>Reminders</h2>
+
+            <div class="reminder-controls">
+                <label>
+                    Notify me before
+                    <select id="notifyDays" onchange="loadReminders()">
+                        <option value="3">3 Days</option>
+                        <option value="7">7 Days</option>
+                        <option value="15">15 Days</option>
+                        <option value="30">30 Days</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="reminder-list" id="reminderList">
+                <!-- Upcoming reminders will render here -->
+            </div>
+
+        </section>
+
+        <section id="settings" class="section">
+
+            <h2>Settings</h2>
+
+            <div class="settings-grid">
+
+                <!-- Reminder Preferences -->
+                <div class="settings-card">
+                    <h3>Reminder Preferences</h3>
+
+                    <label>
+                        Default Notify Days
+                        <select id="defaultNotify">
+                            <option value="3">3 Days</option>
+                            <option value="7">7 Days</option>
+                            <option value="15">15 Days</option>
+                            <option value="30">30 Days</option>
+                        </select>
+                    </label>
+
+                    <label class="switch">
+                        <input type="checkbox" id="enableReminders" checked>
+                        Enable Reminders
+                    </label>
+                </div>
+
+                <!-- Display Settings -->
+                <div class="settings-card">
+                    <h3>Display Settings</h3>
+
+                    <label>
+                        Currency
+                        <select id="currencySelect">
+                            <option value="INR">₹ INR</option>
+                            <option value="USD">$ USD</option>
+                            <option value="EUR">€ EUR</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Date Format
+                        <select id="dateFormat">
+                            <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                            <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                        </select>
+                    </label>
+                </div>
+
+                <!-- Data Controls -->
+                <div class="settings-card danger">
+                    <h3>Data Controls</h3>
+
+                    <input type="file" id="importFile" accept=".csv" />
+
+                    <button onclick="importData()">Import CSV</button>
+                    <button onclick="exportData()">Export Subscriptions</button>
+                    <button class="danger-btn" onclick="clearAllData()">Clear All Data</button>
+                </div>
+                <div class="csv-help">
+                    <h3>📂 CSV Import Format</h3>
+
+                    <p>Upload a CSV file with the following columns:</p>
+
+                    <pre>
+Service,Amount,Cycle,Next Billing
+Netflix,499,MONTHLY,2026-03-07
+Amazon Prime,1499,YEARLY,2026-01-15
+Spotify,299,MONTHLY,2026-02-20
+    </pre>
+
+                    <ul>
+                        <li>✔ Amount must be a number (no ₹ symbol, no commas)</li>
+                        <li>✔ Cycle must be MONTHLY or YEARLY</li>
+                        <li>✔ Date must be in yyyy-mm-dd format</li>
+                        <li>✔ First row must contain column headers</li>
+                    </ul>
+                </div>
+
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/js/dashboard.js"></script>
+</body>
+</html>

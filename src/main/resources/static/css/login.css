@@ -1,0 +1,271 @@
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", "Poppins", sans-serif;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(180deg, #4b2c6f, #b96da8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* ---------- BACKGROUND ---------- */
+
+.background {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image:
+            radial-gradient(1px 1px at 10% 20%, white, transparent),
+            radial-gradient(1px 1px at 20% 80%, white, transparent),
+            radial-gradient(1px 1px at 30% 40%, white, transparent),
+            radial-gradient(1px 1px at 40% 70%, white, transparent),
+            radial-gradient(1px 1px at 50% 10%, white, transparent),
+            radial-gradient(1px 1px at 60% 50%, white, transparent),
+            radial-gradient(1px 1px at 70% 30%, white, transparent),
+            radial-gradient(1px 1px at 80% 90%, white, transparent),
+            radial-gradient(1px 1px at 90% 60%, white, transparent),
+            radial-gradient(2px 2px at 25% 25%, white, transparent),
+            radial-gradient(2px 2px at 75% 75%, white, transparent);
+    animation: twinkle 6s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.6; }
+    to { opacity: 1; }
+}
+
+/* ---------- SHOOTING STARS ---------- */
+
+.shooting-stars span {
+    position: absolute;
+    width: 140px;
+    height: 2px;
+    background: linear-gradient(90deg, white, transparent);
+    opacity: 0;
+    animation: shoot 2.3s linear forwards;
+}
+
+@keyframes shoot {
+    0% {
+        transform: translate(-200px, -200px) rotate(45deg);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    100% {
+        transform: translate(1000px, 800px) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+/* ---------- WRAPPER ---------- */
+
+.login-wrapper {
+    position: relative;
+    width: 360px;
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+    z-index: 1;
+}
+
+/* ---------- ILLUSTRATION ---------- */
+
+.illustration {
+    height: 180px;
+    background: linear-gradient(180deg, #6f4fa3, #f2a3b3);
+    position: relative;
+}
+
+.moon {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    width: 40px;
+    height: 40px;
+    background: #ffdede;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(255,255,255,0.6);
+}
+
+.mountains {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.mountain {
+    position: absolute;
+    bottom: -20px;
+    width: 160px;
+    height: 160px;
+    transform: rotate(45deg);
+    border-radius: 20px;
+}
+
+.mountain.back {
+    background: #7a5aa5;
+    left: 20px;
+}
+
+.mountain.mid {
+    background: #8d65b7;
+    left: 100px;
+    bottom: -30px;
+}
+
+.mountain.front {
+    background: #a779c7;
+    left: 180px;
+    bottom: -40px;
+}
+
+/* ---------- ✅ BRAND LOGO ---------- */
+
+.brand {
+    position: absolute;
+    top: 14px;
+    left: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 20;
+}
+
+.brand i {
+    font-size: 30px;
+    color: #ffffff;
+}
+
+.brand span {
+    font-size: 30px;        /* BIG brand text */
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: #ffffff;
+    text-shadow: 0 3px 12px rgba(0,0,0,0.4);
+}
+
+/* ---------- LOGIN CARD ---------- */
+
+.login-card {
+    padding: 30px;
+    padding-top: 70px;   /* space below brand */
+    text-align: center;
+}
+
+.title {
+    margin-bottom: 22px;
+    color: #5a3c73;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 22px;
+}
+
+/* ---------- INPUTS ---------- */
+
+.input-group {
+    display: flex;
+    align-items: center;
+    background: #f4c2d7;
+    border-radius: 22px;
+    padding: 12px 16px;
+    margin-bottom: 15px;
+    transition: transform 0.25s ease;
+}
+
+.input-group:hover {
+    transform: scale(1.03);
+}
+
+.input-group .icon {
+    margin-right: 10px;
+}
+
+.input-group input {
+    border: none;
+    outline: none;
+    background: transparent;
+    flex: 1;
+    color: #333;
+    font-size: 14px;
+}
+
+/* ---------- OPTIONS ---------- */
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.options a {
+    color: #7a4a8d;
+    text-decoration: none;
+}
+
+/* ---------- BUTTON ---------- */
+
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
+    border: none;
+    background: #7a4a8d;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* ---------- FOOTER ---------- */
+
+.create {
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #7a4a8d;
+    cursor: pointer;
+}
+
+/* ---------- FORGOT MODAL ---------- */
+
+#forgotBox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    width: 340px;
+    background: white;
+    padding: 28px;
+    border-radius: 18px;
+    z-index: 100000;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+
+.forgot-box input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+.forgot-box button {
+    padding: 12px;
+    width: 100%;
+    background: #7a4a8d;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+
+<div class="background">
+    <div class="stars"></div>
+    <div class="shooting-stars"></div>
+</div>
+
+<div class="login-wrapper">
+
+    <div class="illustration">
+        <div class="mountains">
+            <div class="mountain back"></div>
+            <div class="mountain mid"></div>
+            <div class="mountain front"></div>
+        </div>
+        <div class="moon"></div>
+    </div>
+
+    <div class="login-card">
+        <h2 class="title">Create Account</h2>
+
+        <div class="input-group">
+            <span class="icon">👤</span>
+            <input id="name" type="text" placeholder="Full Name">
+        </div>
+
+        <div class="input-group">
+            <span class="icon">📧</span>
+            <input id="email" type="email" placeholder="Email">
+        </div>
+
+        <div class="input-group">
+            <span class="icon">🔒</span>
+            <input id="password" type="password" placeholder="Password">
+        </div>
+
+        <div class="input-group">
+            <span class="icon">🔒</span>
+            <input id="confirmPassword" type="password" placeholder="Confirm Password">
+        </div>
+
+        <button class="login-btn" onclick="register()">Register</button>
+
+        <p id="registerMessage" class="create"></p>
+
+        <p class="create" onclick="goLogin()">Back to Login</p>
+    </div>
+
+</div>
+
+<script src="/js/login.js"></script>
+</body>
+</html>

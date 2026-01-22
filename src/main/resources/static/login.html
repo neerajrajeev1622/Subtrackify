@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="background">
+    <div class="stars"></div>
+    <div class="shooting-stars"></div>
+</div>
+
+<div class="login-wrapper">
+
+    <div class="illustration">
+        <div class="mountains">
+            <div class="mountain back"></div>
+            <div class="mountain mid"></div>
+            <div class="mountain front"></div>
+        </div>
+        <div class="moon"></div>
+    </div>
+
+    <!-- ✅ BRAND LOGO TOP LEFT -->
+    <div class="brand">
+        <i class="fa-solid fa-rocket"></i>
+        <span>SubTrackify</span>
+    </div>
+
+    <div class="login-card">
+
+        <h2 class="title">Login</h2>
+
+        <div class="input-group">
+            <span class="icon">📧</span>
+            <input id="loginEmail" type="email" placeholder="Email">
+        </div>
+
+        <div class="input-group">
+            <span class="icon">🔒</span>
+            <input id="loginPassword" type="password" placeholder="Password">
+        </div>
+
+        <div class="options">
+            <label>
+                <input type="checkbox">
+                remember me
+            </label>
+
+            <a href="javascript:void(0)" onclick="openForgot();">
+                forgot password
+            </a>
+        </div>
+
+        <button class="login-btn" onclick="login()">Login</button>
+
+        <p id="loginMessage" class="create"></p>
+
+        <p class="create" onclick="goRegister()">Create Account</p>
+    </div>
+
+</div>
+
+<!-- Forgot Password Modal -->
+<div id="forgotBox" class="forgot-box">
+
+    <h3>Reset Password</h3>
+
+    <input id="forgotEmail" placeholder="Enter your email">
+    <input id="newPassword" type="password" placeholder="New password">
+
+    <button onclick="resetPassword()">Reset Password</button>
+
+</div>
+
+<script src="/js/login.js"></script>
+</body>
+</html>
